@@ -3,7 +3,9 @@ package com.example.meprojectforsamsung;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +18,8 @@ public class CreateActivity extends AppCompatActivity {
     int dohod,summa,time;
     String edit_textDohod, edit_textSumma, edit_textTime;
     int input;
+
+    public final String MY_SETTINGS = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +44,15 @@ public class CreateActivity extends AppCompatActivity {
         button_g.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                    SharedPreferences sp = getSharedPreferences(MY_SETTINGS, Context.MODE_PRIVATE);
+                    SharedPreferences.Editor e = sp.edit();
+                    e.putInt("time1", time);
+                    e.putInt("position", 650);
+                    e.putBoolean("car1", true);
+                    e.apply();
                     Intent myIntent = new Intent(CreateActivity.this, MainActivity.class);
                     startActivity(myIntent);
+
             }
         });
 
@@ -93,12 +104,6 @@ public class CreateActivity extends AppCompatActivity {
 
 
     }
-
-    public int getTime(){
-        return time;
-    }
-
-
 
 
 

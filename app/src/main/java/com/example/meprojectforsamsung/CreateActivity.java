@@ -6,6 +6,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -24,18 +25,19 @@ public class CreateActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_create);
 
-        Button button = (Button) findViewById(R.id.button);
+        Button button = findViewById(R.id.button);
 
-        EditText editText_dohod = (EditText) findViewById(R.id.editTextNumber);
-        EditText editText_summa = (EditText) findViewById(R.id.editTextNumber2);
-        EditText editText_time = (EditText) findViewById(R.id.editTextNumber3);
+        EditText editText_dohod = findViewById(R.id.editTextNumber);
+        EditText editText_summa = findViewById(R.id.editTextNumber2);
+        EditText editText_time = findViewById(R.id.editTextNumber3);
 
-        TextView textView = (TextView) findViewById(R.id.textView1);
+        TextView textView = findViewById(R.id.textView1);
 
-        ImageView button_g = (ImageView) findViewById(R.id.galochka);
-        ImageView button_k = (ImageView) findViewById(R.id.krestik);
+        ImageView button_g = findViewById(R.id.galochka);
+        ImageView button_k =  findViewById(R.id.krestik);
 
         editText_dohod.setText(edit_textDohod);
         editText_summa.setText(edit_textSumma);
@@ -59,9 +61,9 @@ public class CreateActivity extends AppCompatActivity {
         button_k.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                editText_dohod.setText(0);
-                editText_summa.setText(0);
-                editText_time.setText(0);
+                editText_dohod.setText("0");
+                editText_summa.setText("0");
+                editText_time.setText("0");
             }
         });
 

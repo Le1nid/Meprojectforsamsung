@@ -48,31 +48,25 @@ public class CreateActivity extends AppCompatActivity {
             public void onClick(View v) {
                 SharedPreferences sp = getSharedPreferences(MY_SETTINGS, Context.MODE_PRIVATE);
                 SharedPreferences.Editor e = sp.edit();
-                if (!sp.getBoolean("car1", false)) {
                     e.putInt("time1", time);
                     e.putInt("position", 750);
                     e.putBoolean("car1", true);
                     e.apply();
                     Intent myIntent = new Intent(CreateActivity.this, MainActivity.class);
                     startActivity(myIntent);
-                }
-                else if (!sp.getBoolean("car2", false)) {
-                    e.putInt("time2", time);
-                    e.putInt("position2", 750);
-                    e.putBoolean("car2", true);
-                    e.apply();
-                    Intent myIntent = new Intent(CreateActivity.this, MainActivity.class);
-                    startActivity(myIntent);
-                }
+
             }
         });
 
         button_k.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                editText_dohod.setText("0");
-                editText_summa.setText("0");
-                editText_time.setText("0");
+                editText_dohod.setText("");
+                editText_summa.setText("");
+                editText_time.setText("");
+                textView.setText("");
+                button_g.setVisibility(View.INVISIBLE);
+                button_k.setVisibility(View.INVISIBLE);
             }
         });
 
@@ -98,10 +92,12 @@ public class CreateActivity extends AppCompatActivity {
             public void calculate(int dohod, int summa, int time, int input) {
                 input = summa / time;
                 if (input > dohod) {
-                    textView.setText("Мало времени для достижения назначенной суммы");
+                    textView.setText("Твоего дохода маловато, уменьши сумму или увеличь кол-во шагов");
+                    editText_summa.setText("");
+                    editText_time.setText("");
 
                 } else {
-                    textView.setText("Ты готов отдавать " + input + " на накопление?");
+                    textView.setText("Стоимость шага " + input + " рублей,  начинаем копить?");
                     button_g.setVisibility(View.VISIBLE);
                     button_k.setVisibility(View.VISIBLE);
                 }

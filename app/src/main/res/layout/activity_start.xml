@@ -34,7 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="fitXY"
-            tools:srcCompat="@drawable/map" />
+            android:src="@drawable/map" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

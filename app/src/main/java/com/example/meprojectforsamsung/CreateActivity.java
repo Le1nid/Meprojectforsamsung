@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 public class CreateActivity extends AppCompatActivity {
 
-    int dohod,summa,time;
+    int dohod, summa, time;
     String edit_textDohod, edit_textSumma, edit_textTime;
     int input;
 
@@ -37,7 +37,7 @@ public class CreateActivity extends AppCompatActivity {
         TextView textView = findViewById(R.id.textView1);
 
         ImageView button_g = findViewById(R.id.galochka);
-        ImageView button_k =  findViewById(R.id.krestik);
+        ImageView button_k = findViewById(R.id.krestik);
 
         editText_dohod.setText(edit_textDohod);
         editText_summa.setText(edit_textSumma);
@@ -46,15 +46,24 @@ public class CreateActivity extends AppCompatActivity {
         button_g.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    SharedPreferences sp = getSharedPreferences(MY_SETTINGS, Context.MODE_PRIVATE);
-                    SharedPreferences.Editor e = sp.edit();
+                SharedPreferences sp = getSharedPreferences(MY_SETTINGS, Context.MODE_PRIVATE);
+                SharedPreferences.Editor e = sp.edit();
+                if (!sp.getBoolean("car1", false)) {
                     e.putInt("time1", time);
-                    e.putInt("position", 650);
+                    e.putInt("position", 750);
                     e.putBoolean("car1", true);
                     e.apply();
                     Intent myIntent = new Intent(CreateActivity.this, MainActivity.class);
                     startActivity(myIntent);
-
+                }
+                else if (!sp.getBoolean("car2", false)) {
+                    e.putInt("time2", time);
+                    e.putInt("position2", 750);
+                    e.putBoolean("car2", true);
+                    e.apply();
+                    Intent myIntent = new Intent(CreateActivity.this, MainActivity.class);
+                    startActivity(myIntent);
+                }
             }
         });
 
@@ -86,28 +95,24 @@ public class CreateActivity extends AppCompatActivity {
             }
 
             @SuppressLint("SetTextI18n")
-            public void calculate(int dohod, int summa, int time, int input){
-                    input = summa / time;
-                    if (input > dohod){
-                        textView.setText("Мало времени для достижения назначенной суммы");
+            public void calculate(int dohod, int summa, int time, int input) {
+                input = summa / time;
+                if (input > dohod) {
+                    textView.setText("Мало времени для достижения назначенной суммы");
 
+                } else {
+                    textView.setText("Ты готов отдавать " + input + " на накопление?");
+                    button_g.setVisibility(View.VISIBLE);
+                    button_k.setVisibility(View.VISIBLE);
                 }
-                    else{
-                        textView.setText("Ты готов отдавать " + input + " на накопление?");
-                        button_g.setVisibility(View.VISIBLE);
-                        button_k.setVisibility(View.VISIBLE);
-                    }
 
             }
-
 
 
         });
 
 
     }
-
-
 
 
 }
